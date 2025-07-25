@@ -1,0 +1,42 @@
+{% extends 'studentbase.html' %}
+
+{% block contents %}
+<div class="container">
+    <h2 class="mt-4" style="color: white;">View Uploaded Files and Videos</h2>
+    
+    {% if objects %}
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped mt-3">
+            <thead class="table-dark">
+                <tr>
+                    <th>S.No</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>DOB</th>
+                    <th>Address</th>
+                    <th>PAN</th>
+                    <th>City</th>
+                    <th>Country</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in objects %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ i.Name }}</td>
+                    <td>{{ i.Email }}</td>
+                    <td>{{ i.DOB }}</td>
+                    <td>{{ i.Address }}</td>
+                    <td>{{ i.PAN }}</td>
+                    <td>{{ i.City }}</td>
+                    <td>{{ i.Country }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p class="alert alert-warning mt-3">No records found.</p>
+    {% endif %}
+</div>
+{% endblock %}

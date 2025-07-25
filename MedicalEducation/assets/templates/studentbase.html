@@ -1,0 +1,246 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Student - Technova</title>
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="{% static 'css/styler.css' %}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+<style>
+/* Fullscreen Loader */
+#loader {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: url("{% static 'image/background2.png' %}") no-repeat center center/cover;
+    background-attachment: fixed;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Loader Overlay - Black Transparency */
+#loader::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Adjust transparency */
+    z-index: -1;
+}
+
+/* Navbar */
+.navbar {
+    background: rgba(0, 0, 0, 0.8) !important;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    margin-top: -45px;
+}
+
+/* Body Background with Black Transparency */
+body {
+    padding-top: 70px; /* Prevent content from hiding behind navbar */
+    background: url("{% static 'image/background2.png' %}") no-repeat center center/cover;
+    background-attachment: fixed;
+    position: relative;
+}
+
+/* Black Transparent Overlay */
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.65); /* Adjust transparency */
+    z-index: -1;
+}
+
+.navbar-brand img {
+    height: 35px;
+}
+
+.navbar-nav .nav-link {
+    color: white !important;
+    position: relative;
+}
+
+.navbar-nav .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 2px;
+    background-color: #007bff;
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover::after,
+.navbar-nav .nav-link.active::after {
+    transform: scaleX(0.85);
+}
+
+.container {
+    margin-top: 50px;
+}
+
+.course-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    
+}
+
+.course-card {
+    width: 220px;
+    text-align: center;
+    background: white;
+    padding: 15px;  
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(28, 20, 20, 0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+.course-card:hover {
+    transform: scale(1.05);
+}
+
+.course-card img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.course-title {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px; /* Space between text and underline */
+}
+/* Remove default link styling */
+.course-card {
+    text-decoration: none;
+    color: black;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect */
+.course-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.2);
+}
+
+/* Improved course title underline */
+.course-title {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px; /* Space between text and underline */
+}
+
+.course-title::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 80px; /* Adjust width */
+    height: 3px; /* Thickness */
+    background-color: #007bff;
+    transform: translateX(-50%);
+}
+
+.course-title::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 50%; /* Adjust width of the underline */
+    height: 3px; /* Thickness of the underline */
+    background-color: #007bff;
+    transform: translateX(-50%);
+}
+
+footer {
+    background: #f8f9fa;
+    padding: 15px 0;
+}
+
+  </style>
+</head>
+
+<body>
+     <!-- Page Loader -->
+  <div id="loader">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'studentbase' %}">
+        <img src="{% static 'image/logo.png' %}" alt="Technova Academy" height="25">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.url_name == 'studentpage' %}active{% endif %}" href="{% url 'studentpage' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.url_name == 'viewtrainerfilespage' %}active{% endif %}" href="{% url 'viewtrainerfilespage' %}">Materials</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.url_name == 'studentsendquery' %}active{% endif %}" href="{% url 'studentsendquery' %}">Send Queries</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.url_name == 'viewpatientdata' %}active{% endif %}" href="{% url 'viewpatientdata' %}">View Patient Data</a>
+        </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.url_name == 'chatbot' %}active{% endif %}" href="{% url 'chatbot' %}">Chat with AI</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    {% block contents %} {% endblock %}
+  </div>
+  {% block content %}{% endblock %}
+
+    
+    </div>
+    <!-- JavaScript to Hide Loader After Page Load -->
+    <script>
+        window.onload = function() {
+            setTimeout(() => {
+                document.getElementById("loader").style.opacity = "0";
+                setTimeout(() => document.getElementById("loader").style.display = "none", 500);
+            }, 800);
+        };
+      </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

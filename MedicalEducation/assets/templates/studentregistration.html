@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Medical</title>
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css/styler.css' %}" />
+</head>
+
+<body>
+{% block contents %}
+  <div class="registration-container">
+      <div class="registration-form">
+          <h2 class="text-center"><b>Student Registrations Here</b></h2>
+          <form method="POST" action="{% url 'studentregistration' %}">
+              {% csrf_token %}
+              <div class="row">
+                  <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="name">Student Name</label>
+                          {{ form.name }}
+                      </div>
+                  </div>
+                  <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="loginid">Login ID</label>
+                          {{ form.loginid }}
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="password">Password</label>
+                          {{ form.password }}
+                      </div>
+                  </div>
+                  <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="email">Email</label>
+                          {{ form.email }}
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="college">College</label>
+                          {{ form.college }}
+                      </div>
+                  </div>
+                  <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="mobile">Mobile</label>
+                          {{ form.mobile }}
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="address">Address</label>
+                          {{ form.address }}
+                      </div>
+                  </div>
+                  <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="state">State</label>
+                          {{ form.state }}
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-6">
+                      <div class="form-group">
+                        
+                          {{ form.authkey }}
+                      </div>
+                  </div>
+                  <div class="col-md-6">
+                      <div class="form-group">
+                        
+                          {{ form.status }}
+                      </div>
+                  </div>
+              </div>
+              <div class="row justify-content-center">
+                  <div class="col-md-6">
+                      <button type="submit" class="register-btn">Register</button>
+                  </div>
+              </div>
+
+              {% if messages %}
+                  <div class="error-message">
+                      {% for message in messages %}
+                          <p>{{ message }}</p>
+                      {% endfor %}
+                  </div>
+              {% endif %}
+          </form>
+      </div>
+  </div>
+{% endblock %}
+</body>
+
+</html>

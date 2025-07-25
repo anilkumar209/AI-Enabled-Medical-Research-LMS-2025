@@ -1,0 +1,155 @@
+{% extends 'adminbase.html' %}
+
+{% block contents %}
+<style>
+    /* Glassmorphism Effect for Table */
+    .glass-table {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(12px);
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        border-spacing: 10px;
+    }
+
+    th {
+        color: black;
+        font-size: 17px;
+        padding: 18px;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    td {
+        color: #333;
+        font-size: 15px;
+        padding: 18px;
+        text-align: center;
+    }
+
+    tr:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transition: 0.3s ease-in-out;
+    }
+
+    /* Search Box Styling */
+    .search-box {
+        width: 30%;
+        padding: 10px;
+        border: 2px solid #3498db;
+        border-radius: 8px;
+        font-size: 16px;
+        outline: none;
+        transition: 0.3s;
+    }
+
+    .search-box:focus {
+        border-color: #003eb2;
+        box-shadow: 0px 0px 8px rgba(22, 106, 201, 0.8);
+    }
+
+    /* Status Badge Styling */
+    .status-badge {
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 14px;
+        display: inline-block;
+    }
+
+    .waiting { background: #f39c12; color: white; }
+    .activated { background: #2ecc71; color: white; }
+
+    /* Neon Glow Button */
+    .btn-neon {
+        background: linear-gradient(135deg, #0061ff, #60efff);
+        color: white;
+        border: none;
+        padding: 10px 18px;
+        border-radius: 8px;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        box-shadow: 0px 4px 15px rgba(0, 97, 255, 0.5);
+        text-transform: uppercase;
+    }
+
+    .btn-neon:hover {
+        background: linear-gradient(135deg, #60efff, #0061ff);
+        box-shadow: 0px 6px 20px rgba(0, 97, 255, 0.8);
+        transform: translateY(-3px);
+    }
+</style>
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="text-primary">📚 Admin - Registered Students</h2>
+        <input type="text" id="searchInput" class="search-box" placeholder="🔍 Search Student..." onkeyup="searchTable()">
+    </div>
+
+    <div class="table-responsive">
+        <table class="table glass-table text-center">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Login Name</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>Address</th>
+                    <th>State</th>
+                    <th>Auth Key</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="studentTable">
+                {% for i in object %}
+                <tr>
+                    <td>{{ i.id }}</td>
+                    <td class="text-success">{{ i.name }}</td>
+                    <td>{{ i.loginid }}</td>
+                    <td>{{ i.email }}</td>
+                    <td>{{ i.mobile }}</td>
+                    <td>{{ i.address }}</td>
+                    <td>{{ i.state }}</td>
+                    <td>{{ i.authkey }}</td>
+                    
+                    <td>
+                        {% if i.status == 'waiting' %}
+                            <span class="status-badge waiting">Waiting</span>
+                        {% else %}
+                            <span class="status-badge activated">Activated</span>
+                        {% endif %}
+                    </td>
+                    
+                    <td>
+                        {% if i.status == 'waiting' %}
+                            <a href="/activatestudents/?pid={{ i.id }}" class="btn-neon">Activate</a>
+                        {% else %}
+                            <span class="text-success">Activated</span>
+                        {% endif %}
+                    </td>        
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function searchTable() {
+        let input = document.getElementById("searchInput").value.toUpperCase();
+        let rows = document.getElementById("studentTable").getElementsByTagName("tr");
+        for (let i = 0; i < rows.length; i++) {
+            let cols = rows[i].getElementsByTagName("td");
+            let found = false;
+            for (let j = 0; j < cols.length; j++) {
+                if (cols[j] && cols[j].innerText.toUpperCase().includes(input)) {
+                    found = true;
+                    break;
+                }
+            }
+            rows[i].style.display = found ? "" : "none";
+        }
+    }
+</script>
+
+{% endblock %}

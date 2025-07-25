@@ -1,0 +1,239 @@
+body {
+    color: #000;
+    overflow-x: hidden;
+    height: 100%;
+    background-repeat: no-repeat;
+    background: url("{% static 'image/bg1.jpg' %}") no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+input, textarea {
+    background-color: #F3E5F5;
+    border-radius: 50px !important;
+    padding: 10px 12px 10px 12px !important;
+    width: 80%;
+    box-sizing: border-box;
+    border: none !important;
+    border: 1px solid #F3E5F5 !important;
+    font-size: 16px !important;
+    color: #000 !important;
+    font-weight: 400;
+    margin: auto;
+    display: block;
+}
+
+input:focus, textarea:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: 1px solid #5f6a71 !important;
+    outline-width: 0;
+    font-weight: 400;
+}
+
+button:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    outline-width: 0;
+}
+
+.card {
+    border-radius: 0;
+    border: none;
+    width: 50%;
+    margin: auto;
+    margin-top: 80px;
+    background: transparent !important;
+}
+
+.registration-container {
+    background: rgba(0, 0, 0, 0.5); /* Black with 70% transparency */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 80%;
+    max-width: 600px;
+    margin: auto;
+}
+
+.registration-form h2 {
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.registration-table {
+    width: 100%;
+}
+
+.registration-table td {
+    padding: 10px;
+    color: #fff;
+}
+
+.registration-table input, .registration-table textarea {
+    background-color: #F3E5F5;
+    border-radius: 50px !important;
+    padding: 10px 12px !important;
+    width: 100%;
+    box-sizing: border-box;
+    border: none !important;
+    border: 1px solid #F3E5F5 !important;
+    font-size: 16px !important;
+    color: #000 !important;
+    font-weight: 400;
+    margin: auto;
+    display: block;
+}
+
+.registration-table input:focus, .registration-table textarea:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: 1px solid #5f6a71 !important;
+    outline-width: 0;
+    font-weight: 400;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    color: #fff;
+    font-weight: bold;
+}
+
+.form-group input, .form-group textarea {
+    background-color: #F3E5F5;
+    border-radius: 10px !important;
+    padding: 10px 12px !important;
+    width: 100%;
+    box-sizing: border-box;
+    border: none !important;
+    border: 1px solid #F3E5F5 !important;
+    font-size: 16px !important;
+    color: #000 !important;
+    font-weight: 400;
+    margin: auto;
+    display: block;
+}
+
+.form-group input:focus, .form-group textarea:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: 1px solid #5f6a71 !important;
+    outline-width: 0;
+    font-weight: 400;
+}
+
+.register-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.register-btn:hover {
+    background-color: #0056b3;
+}
+
+.error-message {
+    margin-top: 20px;
+    color: red;
+    text-align: center;
+}
+
+.card1 {
+    width: 100%;
+    margin: auto;
+    padding: 40px 30px 10px 30px;
+    background: transparent !important;
+    text-align: center;
+}
+
+.card1::before {
+    display: block;
+    margin: 0 auto 20px auto;
+    width: 50px;
+    height: 50px;
+}
+
+.card2 {
+    display: none;
+}
+
+.heading {
+    margin-bottom: 60px !important;
+}
+
+::placeholder {
+    color: #000 !important;
+    opacity: 1;
+}
+
+:-ms-input-placeholder {
+    color: #000 !important;
+}
+
+::-ms-input-placeholder {
+    color: #000 !important;
+}
+
+.form-control-label {
+    font-size: 12px;
+    margin-left: 15px;
+}
+
+.msg-info {
+    padding-left: 15px;
+    margin-bottom: 30px;
+}
+
+a {
+    color: #000;
+}
+
+a:hover {
+    color: #000;
+}
+
+.bottom {
+    width: 100%;
+    margin-top: 50px !important;
+}
+
+.sm-text {
+    font-size: 15px;
+}
+
+@media screen and (max-width: 992px) {
+    .card1 {
+        width: 100%;
+        padding: 40px 30px 10px 30px;
+    }
+
+    .registration-container {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 10px !important;
+    }
+
+    .registration-container {
+        width: 100%;
+        padding: 10px;
+    }
+}

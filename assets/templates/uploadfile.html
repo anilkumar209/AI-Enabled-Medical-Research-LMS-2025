@@ -1,0 +1,62 @@
+{% extends 'trainerbase.html' %}
+{% load static %}
+
+{% block contents %}
+<div class="upload-container mt-5 d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card shadow-lg p-4">
+        <h2 class="text-center text-primary mb-4"><b>Upload File</b></h2>
+
+        <form method="post" enctype="multipart/form-data" class="text-center">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.as_p }}
+            </div>
+            <button type="submit" class="blue-btn">Upload</button>
+        </form>
+    </div>
+</div>
+
+<style>
+/* Prevent Conflicts by Renaming Container */
+.upload-container { 
+    max-width: 1000px;
+    margin: auto;
+}
+
+/* Card Styling (Hover Effect Removed) */
+.card {
+  border-radius: 15px;
+  background: rgba(0, 0, 0, 0.6) !important; /* Black with semi-transparency */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  color: white; /* Ensures text remains visible */
+  padding: 20px;
+}
+
+
+/* BLUE BUTTON */
+.blue-btn {
+  margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    background: #007bff;
+    border: none;
+    transition: 0.3s ease-in-out;
+}
+
+.blue-btn:hover {
+    background: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .upload-container {
+        width: 90%;
+    }
+}
+</style>
+{% endblock %}

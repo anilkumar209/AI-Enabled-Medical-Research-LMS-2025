@@ -1,0 +1,88 @@
+{% extends 'studentbase.html' %}
+{% load static %}  
+
+{% block contents %}
+<div class="container mt-5">
+    <h2 class="text-center text-light fw-bold mb-4">View Trainer Uploaded Files</h2>
+
+    <div class="table-responsive">
+        <table class="table table-hover text-center shadow-lg">
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>📜 File Name</th>
+                    <th>📝 Description</th>
+                    <th>📁 File</th>
+                    <th>⬇ Download</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in object %}
+                <tr>
+                    <td class="fw-bold text-primary">{{ i.id }}</td>
+                    <td class="text-success">{{ i.filename }}</td>
+                    <td class="text-secondary">{{ i.description }}</td>
+                    <td>{{ i.file }}</td>
+                    <td>
+                        <a href="{{ i.file.url }}" class="btn btn-neon" target="_blank">
+                            <i class="bi bi-download"></i> Download
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    /* Background with Soft Blur */
+    body {
+        color: white;
+        padding-bottom: 40px;
+    }
+
+    /* Table Design - Glassmorphism */
+    .table {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(15px);
+        border-radius: 6px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .table th {
+        background: linear-gradient(135deg, #007bff, #6610f2);
+        color: white;
+        padding: 15px;
+        text-transform: uppercase;
+        border: none;
+    }
+
+    .table tbody tr {
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        font-weight: 500;
+    }
+
+
+    /* Neon Glow Button - Blue */
+    .btn-neon {
+      background: linear-gradient(135deg, #0061ff, #60efff);
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      font-weight: bold;
+      border-radius: 8px;
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+      box-shadow: 0px 4px 15px rgba(0, 97, 255, 0.5);
+      text-transform: uppercase;
+  }
+
+  .btn-neon:hover {
+      background: linear-gradient(135deg, #60efff, #0061ff);
+      box-shadow: 0px 6px 20px rgba(0, 97, 255, 0.8);
+      transform: translateY(-3px);
+  }
+</style>
+
+{% endblock %}

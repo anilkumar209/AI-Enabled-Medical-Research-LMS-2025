@@ -1,0 +1,169 @@
+{% extends 'adminbase.html' %}
+
+{% block contents %}
+<style>
+    /* Table Styling */
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        margin-top: 20px;
+    }
+
+    th, td {
+        padding: 14px;
+        text-align: center;
+    }
+
+    th {
+        background: linear-gradient(135deg, #2c3e50, #34495e);
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+
+    td {
+        font-size: 16px;
+        color: #444;
+    }
+
+    /* Line between rows */
+    tbody tr {
+        border-bottom: 1px solid #ddd;
+        transition: background 0.3s ease-in-out;
+    }
+
+    tbody tr:last-child {
+        border-bottom: none;
+    }
+
+    tr:nth-child(even) {
+        background: #f8f8f8;
+    }
+
+    tr:hover {
+        background: rgba(0, 0, 0, 0.07);
+        transition: 0.3s ease-in-out;
+    }
+
+    /* Neon Effect Download Button */
+    .btn-download {
+        background: linear-gradient(135deg, #0061ff, #60efff);
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        display: inline-block;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        box-shadow: 0px 4px 12px rgba(0, 97, 255, 0.6);
+    }
+
+    .btn-download:hover {
+        background: linear-gradient(135deg, #60efff, #0061ff);
+        box-shadow: 0px 5px 18px rgba(0, 97, 255, 0.9);
+        transform: translateY(-3px) scale(1.05);
+    }
+
+    /* Header & Search Bar Styling */
+    .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding: 10px 0;
+        border-bottom: 2px solid #3498db;
+    }
+
+    .page-title {
+        font-size: 26px;
+        font-weight: bold;
+        color: #007bff;
+        letter-spacing: 1px;
+    }
+
+    .search-box {
+        width: 280px;
+        padding: 10px;
+        border: 2px solid #3498db;
+        border-radius: 8px;
+        font-size: 16px;
+        outline: none;
+        transition: 0.3s;
+    }
+
+    .search-box:focus {
+        border-color: #003eb2;
+        box-shadow: 0px 0px 10px rgba(22, 106, 201, 0.9);
+    }
+
+    @media (max-width: 768px) {
+        .header-container {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .search-box {
+            width: 100%;
+            margin-top: 10px;
+        }
+    }
+</style>
+
+<div class="container mt-4">
+    <div class="header-container">
+        <h2 class="page-title">📁 Admin - Uploaded Files & Videos</h2>
+        <input type="text" id="searchInput" class="search-box" placeholder="🔍 Search Files..." onkeyup="searchTable()">
+    </div>
+
+    <div class="table-responsive">
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>SL Number</th>
+                    <th>File Name</th>
+                    <th>Description</th>
+                    <th>Download</th>
+                </tr>
+            </thead>
+            <tbody id="fileTable">
+                {% for i in object %}
+                <tr>
+                    <td>{{ i.id }}</td>
+                    <td>{{ i.filename }}</td>
+                    <td>{{ i.description }}</td>
+                    <td>
+                        <a href="{{ i.file.url }}" download class="btn-download">⬇ Download</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function searchTable() {
+        let input = document.getElementById("searchInput").value.toUpperCase();
+        let rows = document.getElementById("fileTable").getElementsByTagName("tr");
+        for (let i = 0; i < rows.length; i++) {
+            let cols = rows[i].getElementsByTagName("td");
+            let found = false;
+            for (let j = 0; j < cols.length; j++) {
+                if (cols[j] && cols[j].innerText.toUpperCase().includes(input)) {
+                    found = true;
+                    break;
+                }
+            }
+            rows[i].style.display = found ? "" : "none";
+        }
+    }
+</script>
+
+{% endblock %}

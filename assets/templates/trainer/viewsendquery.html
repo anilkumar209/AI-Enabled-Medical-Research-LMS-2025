@@ -1,0 +1,130 @@
+{% extends 'trainerbase.html' %}
+{% load static %}
+
+
+{% block contents %}
+<div class="container mt-4">
+    <h2 class="text-center text-primary mb-4" whu>Student Queries</h2>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover shadow">
+            <thead class="table-dark">
+                <tr>
+                    <th>S.No</th>
+                    <th>Student Name</th>
+                    <th>Email</th>
+                    <th>Query</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in object %}
+                <tr>
+                    <td class="text-center text-danger">{{ i.id }}</td>
+                    <td class="text-success">{{ i.name }}</td>
+                    <td class="text-primary">{{ i.email }}</td>
+                    <td class="text-dark">{{ i.query }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<style>
+    /* Ensures navbar stays at the top */
+    body {
+        background-color: #f8f9fa;
+        margin: 0;
+        padding-top: 20px; /* Adjust based on navbar height */
+    }
+
+    h2 {
+      color: white;
+    }
+
+    .table {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .table th, .table td {
+        padding: 12px;
+        text-align: center;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #e3f2fd;
+        transition: 0.3s;
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: #f2f2f2;
+    }
+
+ /* Fix Navbar Position */
+/* Navbar */
+.navbar {
+  background: rgba(0, 0, 0, 0.5) !important; /* Black with 80% transparency */
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  padding: 10px 20px; /* Adjust padding for better spacing */
+  transition: background 0.3s ease-in-out;
+}
+
+/* Prevent Content from Overlapping Navbar */
+body {
+  padding-top: 80px; /* Adjust this based on your navbar height */
+  background: url("{% static 'image/background3-transp.png' %}") no-repeat center center/cover;
+  background-attachment: fixed;
+  margin: 0;
+}
+
+/* Optional: Dark Overlay for Background */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: -1;
+}
+
+
+
+/* Navbar Links */
+.navbar-nav .nav-link {
+  color: white !important;
+  transition: color 0.3s ease-in-out;
+  position: relative;
+}
+
+/* Navbar Hover Effect */
+.navbar-nav .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  background-color: #007bff;
+  transform: scaleX(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover::after,
+.navbar-nav .nav-link.active::after {
+  transform: scaleX(0.85);
+}
+
+
+</style>
+{% endblock %}

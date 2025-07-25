@@ -1,0 +1,175 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Trainer - Technova</title>
+    <meta name="description" content="AI in Medical Education" />
+    <meta name="keywords" content="AI, Medical, Education, Training" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/styler.css' %}">
+
+    <style>
+        /* Fullscreen Loader */
+        #loader {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: url("{% static 'image/background3-transp.png' %}") no-repeat center center/cover;
+            background-attachment: fixed;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        /* Loader Overlay - Black Transparency */
+        #loader::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: -1;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(0, 0, 0, 0.7) !important;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+        }
+
+        /* Adjust Body to Prevent Content Overlapping Navbar */
+        body {
+            padding-top: 70px;
+            background: url("{% static 'image/background3-transp.png' %}") no-repeat center center/cover;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: -1;
+        }
+
+        /* Navbar Brand Logo */
+        .navbar-brand img {
+            height: 35px;
+        }
+
+        /* Navbar Links */
+        .navbar-nav .nav-link {
+            color: white !important;
+            position: relative;
+        }
+
+        .navbar-nav .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 100%;
+            height: 2px;
+            background-color: #007bff;
+            transform: scaleX(0);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .navbar-nav .nav-link:hover::after,
+        .navbar-nav .nav-link.active::after {
+            transform: scaleX(0.85);
+        }
+
+        /* Footer */
+        footer {
+            background: #f8f9fa;
+            padding: 15px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Page Loader -->
+    <div id="loader">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand" href="{% url 'trainerpage' %}">
+                <img src="{% static 'image/logo.png' %}" alt="Technova Academy" height="50">
+            </a>
+
+            <!-- Navbar Toggle Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'trainerpage' %}active{% endif %}" href="{% url 'trainerpage' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'viewstudentqueries' %}active{% endif %}" href="{% url 'viewstudentqueries' %}">Queries</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'upload_csv.html' %}active{% endif %}" href="{% url 'upload_csv.html' %}">Queries</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'uploadfile' %}active{% endif %}" href="{% url 'uploadfile' %}">Upload Materials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        {% block contents %} {% endblock %}
+    </div>
+    {% block content %}{% endblock %}
+
+    <!-- JavaScript to Hide Loader After Page Load -->
+    <script>
+        window.onload = function() {
+            setTimeout(() => {
+                document.getElementById("loader").style.opacity = "0";
+                setTimeout(() => document.getElementById("loader").style.display = "none", 500);
+            }, 800);
+        };
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

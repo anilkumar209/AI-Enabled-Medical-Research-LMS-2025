@@ -1,0 +1,56 @@
+{% extends 'studentbase.html' %}
+{% load static %}
+
+{% block title %}Student - MediLearn{% endblock %}
+
+{% block contents %}
+
+<style>
+    .hero-content {
+        position: relative;
+        text-align: center;
+        color: white;
+        background: rgba(0, 0, 0, 0.6);
+        padding: 50px;
+        border-radius: 10px;
+        max-width: 800px;
+        margin: 0 auto;
+        margin-top: 75px;
+    }
+
+    .hero-content h1 {
+        font-size: 3rem;
+        font-weight: bold;
+    }
+
+    .hero-content p {
+        font-size: 1.5rem;
+        margin: 20px 0;
+    }
+
+    .hero-btn {
+        background-color: #007bff;
+        color: white;
+        padding: 15px 30px;
+        border: none;
+        border-radius: 25px;
+        text-transform: uppercase;
+        font-weight: bold;
+        transition: 0.3s;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .hero-btn:hover {
+        background-color: #ffffff;
+        transform: scale(1.05);
+    }
+</style>
+
+<div class="hero-content">
+    <h1>Welcome {{ request.session.loggedstu }}!</h1>
+    <p>Learn. Heal. Inspire. Your journey to becoming a medical professional starts here.</p>
+    <a class="hero-btn {% if request.resolver_match.url_name == 'viewtrainerfilespage' %}active{% endif %} hero-btn" href="{% url 'viewtrainerfilespage' %}">Explore Materials</a>
+</div>
+
+{% endblock %}

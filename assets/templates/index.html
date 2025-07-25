@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    /* Apply Background to Body */
+    body {
+        background: url("{% static 'image/bg1.jpg' %}") no-repeat center center fixed;
+        background-size: cover;
+        height: 100vh;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Hero Section */
+    .hero-section {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    /* Section containing text */
+    .hero-content {
+        text-align: center;
+        color: white;
+        background: rgba(0, 0, 0, 0.5); /* Light overlay */
+        margin-top: 80px;
+        padding: 50px;
+        border-radius: 10px;
+        width: 400%;
+        max-width: 800px;
+    }
+
+    .hero-content h1 {
+        font-size: 48px;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+
+    .hero-content p {
+        font-size: 20px;
+        margin-bottom: 30px;
+    }
+
+    /* Buttons */
+   /* Buttons */
+   .hero-buttons {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.hero-buttons a {
+    text-decoration: none;
+    padding: 12px 25px;
+    display: inline-block;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-get-started {
+    background: #007bff;
+    color: white;
+    border: 2px solid #007bff;
+}
+
+.btn-get-started:hover {
+    background: white;
+    color: #007bff;
+}
+
+.btn-chat-ai {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+.btn-chat-ai:hover {
+    background: white;
+    color: black;
+}
+</style>
+
+    <section class="hero-content" style="margin-right: 355px;">
+        <h1>Welcome to MediLearn</h1>
+        <p>Enhance your learning experience with AI-powered solutions.</p>
+        <div class="hero-buttons">
+            <a href="{% url 'student' %}" class="btn-get-started">Join as Student</a>
+            <a href="{% url 'trainer' %}" class="btn-chat-ai">Join as Trainer</a>
+        </div>
+        </div>
+    </section>
+
+{% endblock %}

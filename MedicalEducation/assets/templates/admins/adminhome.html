@@ -1,0 +1,54 @@
+{% extends 'adminbase.html' %}
+
+{% block contents %}
+<style>
+    .dashboard {
+        display: flex;
+        justify-content: space-around;
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .dashboard-card {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        width: 30%;
+    }
+
+    .dashboard-card h3 {
+        margin: 10px 0;
+        font-size: 20px;
+        color: #333;
+    }
+
+    .count {
+        font-size: 28px;
+        font-weight: bold;
+        color: #007bff;
+    }
+</style>
+
+<div class="container mt-4">
+    <h2 class="text-primary text-center">📊 Admin Dashboard</h2>
+
+    <div class="dashboard">
+        <div class="dashboard-card">
+            <h3>👨‍🏫 Trainers Registered</h3>
+            <div class="count">{{ trainer_count }}</div>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>🎓 Students Registered</h3>
+            <div class="count">{{ student_count }}</div>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>📂 Uploaded Files</h3>
+            <div class="count">{{ file_count }}</div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
